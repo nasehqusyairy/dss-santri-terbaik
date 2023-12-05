@@ -22,7 +22,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="weight" class="form-label">Weight</label>
-                            <input type="number" value="{{ $criteria->weight }}" class="form-control" id="weight"
+                            <input type="text" value="{{ $criteria->weight }}" class="form-control" id="weight"
                                 name="weight">
                         </div>
                         <div class="mb-3">

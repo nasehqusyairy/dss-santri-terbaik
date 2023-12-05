@@ -11,7 +11,10 @@
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/datatables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.card-body table')?.DataTable();
+            // const table = $('.card-body table')
+            // if (table.length === 1) {
+            //     table.DataTable();
+            // }
         });
     </script>
     <style>
@@ -40,11 +43,11 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="#">Dashboard</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
-                            <a class="nav-link" href="/assessment">Assessment</a>
+                            <a class="nav-link" href="/">Ranking</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/students">Students</a>
@@ -61,13 +64,40 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
+                                Matrixes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/values">Values</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">SAW</h6>
+                                </li>
+                                <li><a class="dropdown-item" href="/saw/matrixes/decision">Decision</a></li>
+                                <li><a class="dropdown-item" href="/saw/matrixes/normalization">Normalization</a></li>
+                                <li><a class="dropdown-item" href="/saw/matrixes/optimization">Optimization</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <h6 class="dropdown-header">TOPSIS</h6>
+                                </li>
+                                <li><a class="dropdown-item" href="/topsis/matrixes/normalization">Normalization</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/topsis/matrixes/weightrating">Weight Rating</a></li>
+                            </ul>
+                        </li>
+                        {{-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
                                 Joe Doe
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">My Profile</a></li>
                                 <li><a class="dropdown-item" href="#">Sign Out</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
             </div>

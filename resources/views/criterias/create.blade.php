@@ -20,7 +20,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="weight" class="form-label">Weight</label>
-                            <input type="number" class="form-control" id="weight" name="weight">
+                            <input type="text" class="form-control" id="weight" name="weight">
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-primary">Save</button>

@@ -24,15 +24,16 @@
                                 <th>Actions</th>
                             </thead>
                             <tbody>
-                                @foreach ($criterias as $criteria)
+                                @foreach ($criterias->sortByDesc('weight') as $criteria)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $criteria->name }}</td>
-                                        <td>{{ $criteria->weight }}%</td>
+                                        <td>{{ $criteria->weight * 100 }}%</td>
                                         <td>
-                                            <a href="/criterias/{{ $criteria->id }}/edit" class="btn btn-warning">Edit</a>
+                                            <a href="/criterias/{{ $criteria->id }}/edit"
+                                                class="btn btn-sm mb-3 btn-warning">Edit</a>
                                             <a href="/criterias/{{ $criteria->id }}/delete"
-                                                class="btn btn-danger delete-button">Delete</a>
+                                                class="btn btn-sm mb-3 btn-danger delete-button">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

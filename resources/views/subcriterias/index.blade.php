@@ -31,9 +31,9 @@
                                         <td>{{ $subcriteria->name }}</td>
                                         <td>
                                             <a href="/subcriterias/{{ $subcriteria->id }}/edit"
-                                                class="btn btn-warning">Edit</a>
+                                                class="btn btn-sm mb-3 btn-warning">Edit</a>
                                             <a href="/subcriterias/{{ $subcriteria->id }}/delete"
-                                                class="btn btn-danger delete-button">Delete</a>
+                                                class="btn btn-sm mb-3 btn-danger delete-button">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach

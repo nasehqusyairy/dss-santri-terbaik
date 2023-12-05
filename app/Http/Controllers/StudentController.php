@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assessment;
 use App\Models\Criteria;
 use App\Models\Group;
 use App\Models\Student;
@@ -80,32 +79,32 @@ class StudentController extends Controller
         return redirect('/students');
     }
 
-    public function assessment(Student $student, Criteria $criteria)
+    public function assessment(Student $student)
     {
         $scale = [
             [
                 'name' => 'Tidak Pernah',
                 'description' => 'tidak pernah melakukan',
-                'value' => 0
+                'value' => 1
             ],
             [
                 'name' => 'Jarang',
                 'description' => 'tidak berkomitmen dan pernah melakukan, namun jarang menemui (studi kasus atau sub kriteria)',
-                'value' => 25
+                'value' => 2
             ],
             [
                 'name' => 'Kadang-Kadang',
-                'value' => 50,
+                'value' => 3,
                 'description' => 'tidak berkomitmen dan tidak selalu melakukan walaupun sering',
             ],
             [
                 'name' => 'Sering',
-                'value' => 75,
+                'value' => 4,
                 'description' => 'tidak berkomitmen, tapi selalu melakukan',
             ],
             [
                 'name' => 'Selalu',
-                'value' => 100,
+                'value' => 5,
                 'description' => 'berkomitmen dan selalu melakukan',
             ],
 
@@ -113,10 +112,9 @@ class StudentController extends Controller
 
         return view('students.assessment', [
             'student' => $student,
-            'criteria' => $criteria,
-            'title' => "$student->name's $criteria->name Assessment",
+            'title' => "$student->name's Assessment",
             'scale' => $scale,
-            'score' => $student->assessments()->where('criteria_id', $criteria->id)->first()->score ?? 0
+            'criterias' => Criteria::all(),
         ]);
     }
 }

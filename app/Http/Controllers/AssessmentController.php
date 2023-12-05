@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assessment;
+use App\Models\Criteria;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class AssessmentController extends Controller
@@ -23,33 +25,39 @@ class AssessmentController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
+        $criterias = Criteria::all();
         $student_id = $request->input('student_id');
-        $criteria_id = $request->input('criteria_id');
-        $values = $request->input('values');
+        $criteria_ids = $request->input('criteria_id');
+        $values = [];
 
-        $value = array_sum($values) / count($values);
+        foreach ($criterias as $criteria) {
+            $values[$criteria->id] = $request->input($criteria->name);
+        }
 
-        $assessment = Assessment::where('student_id', $student_id)
-            ->where('criteria_id', $criteria_id)
-            ->first();
+        // dd($values);
 
-        if ($assessment) {
-            $assessment->score = $value;
-            $assessment->save();
-        } else {
+        foreach ($criteria_ids as $index => $criteria_id) {
+            // $existingAssessment = Assessment::where('student_id', $student_id)->
+            //     ->first();
+
+            $score = array_sum($values[$criteria_id]) / count($values[$criteria_id]);
+            // dd(array_sum($values[$criteria_id]) / count($values[$criteria_id]));
+
+            // if ($existingAssessment) {
+            //     $existingAssessment->score = $score;
+            //     $existingAssessment->save();
+            // } else {
             Assessment::create([
                 'student_id' => $student_id,
                 'criteria_id' => $criteria_id,
-                'score' => $value,
+                'score' => $score,
             ]);
+            // }
         }
-        session()->flash('message', 'Assessment created successfully!');
-        return redirect()->route('students.index');
+
+        return redirect('/students');
     }
 
     /**
@@ -79,8 +87,17 @@ class AssessmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Assessment $assessment)
+    public function destroy(Student $student)
     {
-        //
+        Assessment::where('student_id', $student->id)->delete();
+        return redirect('/values');
+    }
+    public function values()
+    {
+        return view('values', [
+            'title' => 'Values',
+            'students' => Student::all(),
+            'criterias' => Criteria::all()
+        ]);
     }
 }

@@ -50,10 +50,10 @@ class SubCriteriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SubCriteria $subCriteria)
+    public function edit(SubCriteria $subcriteria)
     {
         return view('subcriterias.edit', [
-            'subcriteria' => $subCriteria,
+            'subcriteria' => $subcriteria,
             'title' => 'Edit Sub Criteria',
             'criterias' => Criteria::all()
         ]);

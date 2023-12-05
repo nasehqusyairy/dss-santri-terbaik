@@ -3,6 +3,7 @@
     <main>
         <div class="container">
             <h1>{{ $title }}</h1>
+            <p class="text-muted">Last Score : <span class="badge text-bg-primary">{{ $score }}</span></p>
             <hr>
             @if (session('message'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -28,29 +29,26 @@
                         <button class="btn btn-primary mb-3">Submit</button>
                         @csrf
                         <input type="hidden" name="student_id" value="{{ $student->id }}">
+                        <input type="hidden" name="criteria_id" value="{{ $criteria->id }}">
                         <table class="table table-striped table-hover">
                             <thead>
+                                <th>#</th>
                                 <th>Sub Criteria</th>
                                 <th>Value</th>
                             </thead>
                             <tbody>
-                                @foreach ($criterias as $criteria)
-                                    <input type="hidden" name="criteria_id[]" value="{{ $criteria->id }}">
-                                    <tr class="table-dark">
-                                        <td colspan="2">{{ $criteria->name }}</td>
+                                @foreach ($criteria->subCriterias as $subCriteria)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $subCriteria->name }}</td>
+                                        <td>
+                                            <select class="form-select" name="values[]">
+                                                @foreach ($scale as $s)
+                                                    <option value="{{ $s['value'] }}">{{ $s['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </td>
                                     </tr>
-                                    @foreach ($criteria->subCriterias as $subCriteria)
-                                        <tr>
-                                            <td>{{ $subCriteria->name }}</td>
-                                            <td>
-                                                <select class="form-select" name="{{ $criteria->name }}[]">
-                                                    @foreach ($scale as $s)
-                                                        <option value="{{ $s['value'] }}">{{ $s['name'] }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </td>
-                                        </tr>
-                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

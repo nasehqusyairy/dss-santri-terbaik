@@ -19,4 +19,10 @@ class Student extends Model
     {
         return $this->hasMany(Assessment::class);
     }
+
+    public function criterias()
+    {
+        return $this->belongsToMany(Criteria::class, 'assessments', 'student_id', 'criteria_id')
+            ->withPivot('score');
+    }
 }

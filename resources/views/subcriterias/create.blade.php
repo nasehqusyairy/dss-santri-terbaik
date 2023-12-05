@@ -17,7 +17,7 @@
                         <div class="mb-3">
                             <label for="criteria" class="form-label">Criteria</label>
                             <select class="form-select" name="criteria_id" id="criteria">
-                                @foreach ($criterias as $criteria)
+                                @foreach ($criterias->sortByDesc('weight') as $criteria)
                                     <option value="{{ $criteria->id }}">
                                         {{ $criteria->name }}</option>
                                 @endforeach

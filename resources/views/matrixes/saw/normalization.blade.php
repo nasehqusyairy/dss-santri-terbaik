@@ -12,28 +12,27 @@
             @endif
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <a href="/groups/create" class="btn btn-primary">Add</a>
-                    </div>
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
                                 <th>#</th>
                                 <th>Name</th>
-                                <th>Actions</th>
+                                @foreach ($criterias->sortByDesc('weight') as $criteria)
+                                    <th>{{ $criteria->name }}</th>
+                                @endforeach
                             </thead>
                             <tbody>
-                                @foreach ($groups as $group)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $group->name }}</td>
-                                        <td>
-                                            <a href="/groups/{{ $group->id }}/edit"
-                                                class="btn btn-sm mb-3 btn-warning">Edit</a>
-                                            <a href="/groups/{{ $group->id }}/delete"
-                                                class="btn btn-sm mb-3 btn-danger delete-button">Delete</a>
-                                        </td>
-                                    </tr>
+                                @foreach ($students as $student)
+                                    @if ($student->criterias->count() === $criterias->count())
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $student->name }}</td>
+                                            @foreach ($student->criterias->sortByDesc('weight') as $criteria)
+                                                <td>{{ ($criteria->pivot->score * $criteria->weight) / $maxmin[$criteria->name]['max'] }}
+                                                </td>
+                                            @endforeach
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

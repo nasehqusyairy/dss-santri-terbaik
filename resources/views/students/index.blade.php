@@ -30,23 +30,17 @@
                                         <td>{{ $student->name }}</td>
                                         <td>{{ $student->group->name }}</td>
                                         <td>
-                                            <a href="/students/{{ $student->id }}/edit" class="btn btn-warning">Edit</a>
+                                            <a href="/students/{{ $student->id }}/edit"
+                                                class="btn btn-sm mb-3 btn-warning">Edit</a>
                                             <a href="/students/{{ $student->id }}/delete"
-                                                class="btn btn-danger delete-button">Delete</a>
-                                            <div class="dropdown d-inline-block">
-                                                <button class="btn btn-info dropdown-toggle" type="button"
-                                                    data-bs-toggle="dropdown">
-                                                    Assessment
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    @foreach ($criterias as $criteria)
-                                                        <li>
-                                                            <a class="dropdown-item"
-                                                                href="/students/{{ $student->id }}/assessment/{{ $criteria->id }}">{{ $criteria->name }}</a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
+                                                class="btn btn-sm mb-3 btn-danger delete-button">Delete</a>
+                                            @if ($student->assessments->count() === 0)
+                                                <a disabled href="/students/{{ $student->id }}/assessment/"
+                                                    class="btn btn-sm btn-info mb-3">Assessment</a>
+                                            @else
+                                                <button disabled="disabled"
+                                                    class="btn btn-sm btn-primary mb-3">Assessment</button>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
