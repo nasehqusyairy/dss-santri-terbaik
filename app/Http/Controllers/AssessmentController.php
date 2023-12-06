@@ -30,33 +30,20 @@ class AssessmentController extends Controller
         $criterias = Criteria::all();
         $student_id = $request->input('student_id');
         $criteria_ids = $request->input('criteria_id');
-        $values = [];
-
-        foreach ($criterias as $criteria) {
-            $values[$criteria->id] = $request->input($criteria->name);
-        }
+        $values = $request->input('values');
 
         // dd($values);
 
         foreach ($criteria_ids as $index => $criteria_id) {
-            // $existingAssessment = Assessment::where('student_id', $student_id)->
-            //     ->first();
 
-            $score = array_sum($values[$criteria_id]) / count($values[$criteria_id]);
-            // dd(array_sum($values[$criteria_id]) / count($values[$criteria_id]));
-
-            // if ($existingAssessment) {
-            //     $existingAssessment->score = $score;
-            //     $existingAssessment->save();
-            // } else {
+            $score = $values[$index];
             Assessment::create([
                 'student_id' => $student_id,
                 'criteria_id' => $criteria_id,
                 'score' => $score,
             ]);
-            // }
         }
-
+        session()->flash('message', 'Assessment successfully created.');
         return redirect('/students');
     }
 
@@ -90,6 +77,7 @@ class AssessmentController extends Controller
     public function destroy(Student $student)
     {
         Assessment::where('student_id', $student->id)->delete();
+        session()->flash('message', 'Assessment successfully deleted.');
         return redirect('/values');
     }
     public function values()

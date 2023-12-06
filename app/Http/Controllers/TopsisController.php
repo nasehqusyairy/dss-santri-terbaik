@@ -55,7 +55,7 @@ class TopsisController extends Controller
         foreach ($squared_totals as $criteria_name => $total) {
             $dividing_values[$criteria_name] = sqrt($total);
         }
-
+        // dd($dividing_values);
         return $dividing_values;
     }
     public function maxmin()
@@ -77,7 +77,7 @@ class TopsisController extends Controller
                 'min' => min($values),
             ];
         }
-
+        // dd($maxmin_values);
         return $maxmin_values;
     }
     public function aplusamin()
@@ -91,6 +91,7 @@ class TopsisController extends Controller
             ];
         }
 
+        // dd($aplusamin_values);
         return $aplusamin_values;
     }
 
@@ -105,9 +106,10 @@ class TopsisController extends Controller
             if (!isset($values[$assessment->criteria->name])) {
                 $values[$assessment->criteria->name] = [];
             }
-            $values[$assessment->criteria->name][] = $calculated_value;
+            $values[$assessment->criteria->name][$assessment->student->name] = $calculated_value;
         }
 
+        // dd($values);
         return $values;
     }
     public function splussmin()
@@ -118,22 +120,22 @@ class TopsisController extends Controller
 
         $splussmin_values = [];
 
-        $i = 0;
         foreach ($students as $student) {
-            $splus = 0;
-            $smin = 0;
-            foreach ($student->criterias as $criteria) {
-                $splus += pow($weightratingValues[$criteria->name][$i] - $aplusamin[$criteria->name]['aplus'], 2);
-                $smin += pow($weightratingValues[$criteria->name][$i] - $aplusamin[$criteria->name]['amin'], 2);
+            if ($student->criterias->count() > 0) {
+                $splus = 0;
+                $smin = 0;
+                foreach ($student->criterias->sortByDesc('weight') as $criteria) {
+                    $splus += pow($weightratingValues[$criteria->name][$student->name] - $aplusamin[$criteria->name]['aplus'], 2);
+                    $smin += pow($weightratingValues[$criteria->name][$student->name] - $aplusamin[$criteria->name]['amin'], 2);
+                }
+                $splussmin_values[] = [
+                    'student' => $student,
+                    'splus' => sqrt($splus),
+                    'smin' => sqrt($smin),
+                ];
             }
-            $splussmin_values[] = [
-                'student' => $student,
-                'splus' => sqrt($splus),
-                'smin' => sqrt($smin),
-            ];
-            $i++;
         }
-
+        // dd($splussmin_values);
         usort($splussmin_values, function ($a, $b) {
             $valueA = $a['smin'] / ($a['splus'] + $a['smin']);
             $valueB = $b['smin'] / ($b['splus'] + $b['smin']);

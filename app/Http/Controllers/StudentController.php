@@ -83,29 +83,24 @@ class StudentController extends Controller
     {
         $scale = [
             [
-                'name' => 'Tidak Pernah',
-                'description' => 'tidak pernah melakukan',
+                'name' => 'Kurang',
                 'value' => 1
             ],
             [
-                'name' => 'Jarang',
-                'description' => 'tidak berkomitmen dan pernah melakukan, namun jarang menemui (studi kasus atau sub kriteria)',
+                'name' => 'Cukup',
                 'value' => 2
             ],
             [
-                'name' => 'Kadang-Kadang',
+                'name' => 'Bagus',
                 'value' => 3,
-                'description' => 'tidak berkomitmen dan tidak selalu melakukan walaupun sering',
             ],
             [
-                'name' => 'Sering',
+                'name' => 'Sagat Bagus',
                 'value' => 4,
-                'description' => 'tidak berkomitmen, tapi selalu melakukan',
             ],
             [
-                'name' => 'Selalu',
+                'name' => 'Sempurna',
                 'value' => 5,
-                'description' => 'berkomitmen dan selalu melakukan',
             ],
 
         ];
