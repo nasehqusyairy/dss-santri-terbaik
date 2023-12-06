@@ -28,6 +28,11 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $student->name }}</td>
                                             @foreach ($student->criterias->sortByDesc('weight') as $criteria)
+                                                @php
+                                                    // if ($criteria->name == 'Kepribadian') {
+                                                    //     dd($criteria->pivot->score, $dividing[$criteria->name], $criteria->pivot->score / $dividing[$criteria->name]);
+                                                    // }
+                                                @endphp
                                                 <td>{{ $criteria->pivot->score / $dividing[$criteria->name] }}
                                                 </td>
                                             @endforeach

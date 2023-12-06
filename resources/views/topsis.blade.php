@@ -18,8 +18,8 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Group</th>
-                                <th>S+</th>
-                                <th>S-</th>
+                                <th>S(+)</th>
+                                <th>S(-)</th>
                                 <th>Score</th>
                             </thead>
                             <tbody>

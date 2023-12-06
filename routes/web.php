@@ -6,6 +6,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubCriteriaController;
 use App\Http\Controllers\SawController;
+use App\Http\Controllers\ScaleController;
 use App\Http\Controllers\TopsisController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,9 @@ Route::get('/students/{student}/assessment/', [StudentController::class, 'assess
 
 Route::resource('/assessments', AssessmentController::class);
 Route::get('/assessments/{student}/delete', [AssessmentController::class, 'destroy']);
+
+Route::resource('/scales', ScaleController::class);
+Route::get('/scales/{scale}/delete', [ScaleController::class, 'destroy']);
 
 Route::get('/values', [AssessmentController::class, 'values']);
 

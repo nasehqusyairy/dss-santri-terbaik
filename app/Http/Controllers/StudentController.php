@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Criteria;
 use App\Models\Group;
+use App\Models\Scale;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -81,29 +82,7 @@ class StudentController extends Controller
 
     public function assessment(Student $student)
     {
-        $scale = [
-            [
-                'name' => 'Kurang',
-                'value' => 1
-            ],
-            [
-                'name' => 'Cukup',
-                'value' => 2
-            ],
-            [
-                'name' => 'Bagus',
-                'value' => 3,
-            ],
-            [
-                'name' => 'Sagat Bagus',
-                'value' => 4,
-            ],
-            [
-                'name' => 'Sempurna',
-                'value' => 5,
-            ],
-
-        ];
+        $scale = Scale::all();
 
         return view('students.assessment', [
             'student' => $student,

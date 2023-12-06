@@ -12,32 +12,34 @@
             @endif
             <div class="card">
                 <div class="card-body">
-                    <form action="/assessments" method="POST">
-                        <button class="btn btn-primary mb-3">Submit</button>
-                        @csrf
-                        <input type="hidden" name="student_id" value="{{ $student->id }}">
+                    <div class="mb-3">
+                        <a href="/scales/create" class="btn btn-primary">Add</a>
+                    </div>
+                    <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
-                                <th>Criteria</th>
+                                <th>#</th>
+                                <th>Name</th>
                                 <th>Value</th>
+                                <th>Actions</th>
                             </thead>
                             <tbody>
-                                @foreach ($criterias->sortByDesc('weight') as $criteria)
-                                    <input type="hidden" name="criteria_id[]" value="{{ $criteria->id }}">
+                                @foreach ($scales->sortBy('value') as $scale)
                                     <tr>
-                                        <td>{{ $criteria->name }}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $scale->name }}</td>
+                                        <td>{{ $scale->value }}</td>
                                         <td>
-                                            <select class="form-select" name="values[]">
-                                                @foreach ($scale as $s)
-                                                    <option value="{{ $s->value }}">{{ $s->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <a href="/scales/{{ $scale->id }}/edit"
+                                                class="btn btn-sm mb-3 btn-warning">Edit</a>
+                                            <a href="/scales/{{ $scale->id }}/delete"
+                                                class="btn btn-sm mb-3 btn-danger delete-button">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -11,10 +11,7 @@
     <script src="https://cdn.datatables.net/v/bs5/jq-3.7.0/dt-1.13.8/datatables.min.js"></script>
     <script>
         $(document).ready(function() {
-            // const table = $('.card-body table')
-            // if (table.length === 1) {
-            //     table.DataTable();
-            // }
+            $('.card-body table')?.DataTable();
         });
     </script>
     <style>
@@ -57,6 +54,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/criterias">Criterias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/scales">Scales</a>
                         </li>
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="/subcriterias">Sub Criterias</a>
